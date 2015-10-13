@@ -1,17 +1,10 @@
 def largest_prime_factor(n)
-  candidate = n / 2
-  candidate -= 1 if candidate.even?
-
-  while candidate > 1
-    return candidate if factor?(n, candidate) && prime?(candidate)
-    candidate -= 2
+  2.upto(n) do |i|
+    next unless n % i == 0
+    return n / i if prime?(n / i)
   end
 end
 
 def prime?(n)
-  (3..n / 2).step(2).none? { |i| n % i == 0 }
-end
-
-def factor?(n, candidate)
-  n % candidate == 0
+  (2..n / 2).none? { |i| n % i == 0 }
 end
